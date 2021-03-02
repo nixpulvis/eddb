@@ -1,12 +1,12 @@
-use eddb::System;
+use eddb::Dump;
 
 fn main() {
-    System::each_csv("eddb/dumps/systems_recently.csv", &mut |system| {
-        if system.name == "Sol" {
-            println!("{:#?}", system);
-            true
-        } else {
-            false
+    for result in &mut Dump::csv("dumps/systems_recently.csv").unwrap() {
+        if let Ok(system) = result {
+            if system.name == "Sol" {
+                println!("{:#?}", system);
+                break;
+            }
         }
-    });
+    }
 }
