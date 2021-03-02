@@ -1,4 +1,4 @@
-use std::io;
+use std::io::{self, BufReader, BufRead};
 use std::fs::File;
 use std::path::Path;
 use serde::Deserialize;
@@ -82,13 +82,20 @@ impl System {
 // TODO: Remove `csv` function in place of more general `new` (see below)
 // Dump::new(path)  // check filetype and create generic reader.
 // Dump::into_iter() -> CsvIterator | JsonIterator somehow.
-pub struct Dump(csv::Reader<File>);
+pub struct Dump(csv::Reader<File>, u64);
 
 impl Dump {
     pub fn csv<P: AsRef<Path>>(path: P) -> Result<Self, io::Error> {
-        let file = File::open(path)?;
+        let file = File::open(&path)?;
+        let reader = BufReader::new(file);
+        let len = reader.lines().count() as u64;
+        let file = File::open(&path)?;
         let reader = csv::Reader::from_reader(file);
-        Ok(Dump(reader))
+        Ok(Dump(reader, len))
+    }
+
+    pub fn len(&self) -> u64 {
+        self.1 - 1  // subtract the header row
     }
 }
 
