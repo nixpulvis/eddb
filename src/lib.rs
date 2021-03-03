@@ -21,6 +21,7 @@ pub struct System {
     pub coords: Coordinate,
     #[serde(deserialize_with = "serde_utils::bool_or_bit")]
     pub is_populated: bool,
+    #[serde(deserialize_with = "de::zero_is_none")]
     pub population: Option<u64>,
     #[serde(deserialize_with = "serde_utils::bool_or_bit")]
     pub needs_permit: bool,
