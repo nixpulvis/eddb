@@ -4,15 +4,9 @@ use std::path::Path;
 use serde::Deserialize;
 use chrono::{DateTime, Utc};
 use chrono::serde::ts_seconds;
+use elite_journal::{de, Coordinate, Government, Allegiance, Security, Economy};
 
 mod serde_utils;
-
-#[derive(Deserialize, Debug, PartialEq)]
-pub struct Coordinate {
-    pub x: f64,
-    pub y: f64,
-    pub z: f64,
-}
 
 /// EDDB's representation of a solar system
 #[derive(Deserialize, Debug)]
@@ -33,16 +27,20 @@ pub struct System {
     #[serde(with = "ts_seconds")]
     pub updated_at: DateTime<Utc>,
 
-    pub government: Option<String>,
+    #[serde(deserialize_with = "de::enum_is_null")]
+    pub government: Option<Government>,
     pub government_id: Option<u64>,
 
-    pub allegiance: Option<String>,
+    #[serde(deserialize_with = "de::enum_is_null")]
+    pub allegiance: Option<Allegiance>,
     pub allegiance_id: Option<u64>,
 
-    pub security: Option<String>,
+    #[serde(deserialize_with = "de::enum_is_null")]
+    pub security: Option<Security>,
     pub security_id: Option<u64>,
 
-    pub primary_economy: Option<String>,
+    #[serde(deserialize_with = "de::enum_is_null")]
+    pub primary_economy: Option<Economy>,
     pub primary_economy_id: Option<u64>,
 
     pub power: Option<String>,
@@ -52,6 +50,7 @@ pub struct System {
     pub controlling_minor_faction: Option<String>,
     pub controlling_minor_faction_id: Option<u64>,
 
+    // TODO: Waiting on scan datatypes in elite_journal.
     pub reserve_type: Option<String>,
     pub reserve_type_id: Option<u64>,
 }
