@@ -31,7 +31,7 @@ fn assert_system(system: System) {
 }
 
 #[test]
-fn test_system_each_csv() {
+fn csv_systems_recently() {
     System::each_csv("tests/systems_recently.csv", &mut |s| {
         assert_system(s);
         false
@@ -39,7 +39,7 @@ fn test_system_each_csv() {
 }
 
 #[test]
-fn test_system_each_json() {
+fn json_systems_populated() {
     System::each_json("tests/systems_populated.json", &mut |s| {
         assert_system(s);
         false
