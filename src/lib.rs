@@ -4,7 +4,7 @@ use std::path::Path;
 use serde::Deserialize;
 use chrono::{DateTime, Utc};
 use chrono::serde::ts_seconds;
-use elite_journal::{de, Coordinate, Government, Allegiance, Security, Economy};
+use elite_journal::{de, prelude::*};
 
 mod serde_utils;
 
