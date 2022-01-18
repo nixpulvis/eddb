@@ -11,4 +11,4 @@ serde_json = "*"
 chrono = { version = "*", features = ["serde"] }
 
 [dependencies.elite_journal]
-git = "https://github.com/ED-NEWP/elite_journal"
+git = "https://github.com/nixpulvis/elite_journal"
