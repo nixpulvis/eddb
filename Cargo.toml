@@ -9,6 +9,4 @@ csv = "*"
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
 chrono = { version = "*", features = ["serde"] }
-
-[dependencies.elite_journal]
-git = "https://github.com/nixpulvis/elite_journal"
+elite_journal = { version = "0.0.1-dev+alpha-0x01" }
