@@ -1,6 +1,6 @@
 [package]
 name = "eddb"
-version = "0.0.1-dev+alpha"
+version = "0.0.2"
 authors = ["Nathan Lilienthal <nathan@nixpulvis.com>"]
 edition = "2018"
 
@@ -9,4 +9,4 @@ csv = "*"
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
 chrono = { version = "*", features = ["serde"] }
-elite_journal = { version = "0.0.1-dev+alpha-0x01" }
+elite_journal = { path = "../elite_journal" }
