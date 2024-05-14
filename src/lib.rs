@@ -1,10 +1,10 @@
-use std::io::{self, BufReader, BufRead};
-use std::fs::File;
-use std::path::Path;
-use serde::Deserialize;
-use chrono::{DateTime, Utc};
 use chrono::serde::ts_seconds;
+use chrono::{DateTime, Utc};
 use elite_journal::{de, prelude::*};
+use serde::Deserialize;
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
+use std::path::Path;
 
 mod serde_utils;
 
@@ -95,7 +95,7 @@ impl Dump {
     }
 
     pub fn len(&self) -> u64 {
-        self.1 - 1  // subtract the header row
+        self.1 - 1 // subtract the header row
     }
 }
 
