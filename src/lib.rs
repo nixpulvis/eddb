@@ -67,7 +67,10 @@ impl System {
         }
     }
 
-    pub fn each_json(file_path: &str, callback: &mut dyn FnMut(System) -> bool) {
+    pub fn each_json(
+        file_path: &str,
+        callback: &mut dyn FnMut(System) -> bool,
+    ) {
         let file = File::open(file_path).unwrap();
         for system in serde_json::from_reader::<_, Vec<System>>(file).unwrap() {
             if !callback(system) {

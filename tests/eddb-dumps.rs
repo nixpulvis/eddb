@@ -21,18 +21,12 @@ fn assert_system(system: System) {
         system.primary_economy.is_some(),
         system.primary_economy_id.is_some()
     );
-    assert_eq!(
-        system.power_state.is_some(),
-        system.power_state_id.is_some()
-    );
+    assert_eq!(system.power_state.is_some(), system.power_state_id.is_some());
     assert_eq!(
         system.controlling_minor_faction.is_some(),
         system.controlling_minor_faction_id.is_some()
     );
-    assert_eq!(
-        system.reserve_type.is_some(),
-        system.reserve_type_id.is_some()
-    );
+    assert_eq!(system.reserve_type.is_some(), system.reserve_type_id.is_some());
 }
 
 #[test]

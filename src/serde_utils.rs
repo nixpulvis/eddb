@@ -3,7 +3,9 @@ use serde::Deserializer;
 use std::fmt;
 use std::marker::PhantomData;
 
-pub fn bool_or_bit<'de, D: Deserializer<'de>>(deserializer: D) -> Result<bool, D::Error> {
+pub fn bool_or_bit<'de, D: Deserializer<'de>>(
+    deserializer: D,
+) -> Result<bool, D::Error> {
     struct BoolOrBit(PhantomData<fn() -> bool>);
 
     impl<'de> Visitor<'de> for BoolOrBit {
