@@ -9,4 +9,4 @@ csv = "*"
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
 chrono = { version = "*", features = ["serde"] }
-elite_journal = "0.1"
+elite_journal = "0.2"

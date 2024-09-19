@@ -28,19 +28,19 @@ pub struct System {
     #[serde(with = "ts_seconds")]
     pub updated_at: DateTime<Utc>,
 
-    #[serde(deserialize_with = "de::enum_is_null")]
+    #[serde(deserialize_with = "de::null_is_none")]
     pub government: Option<Government>,
     pub government_id: Option<u64>,
 
-    #[serde(deserialize_with = "de::enum_is_null")]
+    #[serde(deserialize_with = "de::null_is_none")]
     pub allegiance: Option<Allegiance>,
     pub allegiance_id: Option<u64>,
 
-    #[serde(deserialize_with = "de::enum_is_null")]
+    #[serde(deserialize_with = "de::null_is_none")]
     pub security: Option<Security>,
     pub security_id: Option<u64>,
 
-    #[serde(deserialize_with = "de::enum_is_null")]
+    #[serde(deserialize_with = "de::null_is_none")]
     pub primary_economy: Option<Economy>,
     pub primary_economy_id: Option<u64>,
 
