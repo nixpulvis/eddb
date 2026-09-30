@@ -44,3 +44,22 @@ fn json_systems_populated() {
         false
     });
 }
+
+/// Every power the populated dump names reads as one, and every standing
+/// but `Expansion` — the one the journal has no word for.
+#[test]
+fn json_powers_read() {
+    let (mut named, mut standing) = (0, 0);
+    System::each_json("tests/systems_populated.json", &mut |s| {
+        if s.power.is_some() {
+            named += 1;
+            assert!(s.controlling_power().is_some(), "{:?}", s.power);
+        }
+        if s.power_state.as_deref().is_some_and(|it| it != "Expansion") {
+            standing += 1;
+            assert!(s.powerplay_state().is_some(), "{:?}", s.power_state);
+        }
+        true
+    });
+    assert!(named > 0 && standing > 0, "the dump named no powers");
+}

@@ -78,6 +78,38 @@ impl System {
             }
         }
     }
+
+    /// The power EDDB files the system under, where it names one.
+    ///
+    /// Kept as text in the row, so that a name this does not know costs the
+    /// power and not the whole system; [`None`] for that and for a blank.
+    /// EDDB spells Arissa Lavigny-Duval in full, which reads.
+    pub fn controlling_power(&self) -> Option<Power> {
+        use serde::de::{value, IntoDeserializer};
+        let name = self.power.as_deref().filter(|it| !it.is_empty())?;
+        let name: value::StrDeserializer<value::Error> =
+            name.into_deserializer();
+        Power::deserialize(name).ok()
+    }
+
+    /// The system's standing in the first Powerplay, where EDDB names one
+    /// the journal has a word for.
+    ///
+    /// EDDB's own spellings: `Control` for what the journal calls
+    /// `Controlled`, and `Expansion`, which the journal has no word for and
+    /// reads as [`None`] with a blank and anything unknown.
+    pub fn powerplay_state(&self) -> Option<PowerplayState> {
+        Some(match self.power_state.as_deref()? {
+            "Control" => PowerplayState::Controlled,
+            "Exploited" => PowerplayState::Exploited,
+            "Contested" => PowerplayState::Contested,
+            "Prepared" => PowerplayState::Prepared,
+            "InPrepareRadius" => PowerplayState::InPrepareRadius,
+            "HomeSystem" => PowerplayState::HomeSystem,
+            "Turmoil" => PowerplayState::Turmoil,
+            _ => return None,
+        })
+    }
 }
 
 // TODO: Error type.
